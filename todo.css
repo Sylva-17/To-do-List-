@@ -1,0 +1,58 @@
+body{
+    background-color: #101214;
+    color: #00FEC4;
+    font-family: "Poppins", sans-serif;
+    
+}
+h1{
+    font-weight: 900;
+}
+ul {list-style: none;}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+}
+#todo-input{
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+   
+}
+form{
+    border: 2px solid #313337;
+    border-radius: 29px;
+}
+
+.add-btn{
+    border: none;
+    border-radius: 29px;
+    background-color: #00FEC4 ;
+    padding: 5px 10px;
+}
+
+.todo{
+     background-color: #1B1D1F; 
+    /* background-color: white; */
+    border-radius:7px ;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.todo-text{
+    
+}
+
+.material-symbols-outlined{
+    color: #313337;
+}
+.delete-btn{
+    background-color: aqua;
+    border: none;
+    
+}
+
+
