@@ -80,8 +80,9 @@ form{
 
 .todo .todo-text{
     padding: 15px;
+    font-size: 14px;
     padding-right: 0;
-     flex-grow: 1;/* il pousse les poubelle a droite */
+    flex-grow: 1;/* il pousse les poubelle a droite */
    
 }
 
