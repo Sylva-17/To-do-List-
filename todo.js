@@ -1,7 +1,9 @@
 const todoForm = document.querySelector('form');
 const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
-let AllTodos = [];
+
+let AllTodos = getTodos();
+updateTodoList();
 
 todoForm.addEventListener('submit',function(e){
     e.preventDefault(); // so the page won't reload
@@ -14,7 +16,8 @@ function addTodo(){
     
     if(todoText.length >0){
         AllTodos.push(todoText);
-        createTodoItem(todoText);
+        updateTodoList();
+        saveTodos();
         todoInput.value =""; 
     }
     
@@ -29,14 +32,54 @@ function updateTodoList(){
 }
 
 function createTodoItem(todo, todoIndex){
+    const todoId = "todo-" + todoIndex;
     const  todoLi = document.createElement("li");
-    todoLi.innerText = todo; //on met le text a l'interrieur de l'element html
-    todoList.append(todoLi);//on met l'element html dans l'element todoList qui contient la liste des taches
-    return todoLi
+
+    todoLi.className = "todo";
+    todoLi.innerHTML= `
+        <input type="checkbox" id="${todoId}">
+                <label class="custom-checkbox" for="${todoId}">
+                    <span class="material-symbols-outlined">check</span>
+                </label>
+                <label for="${todoId}" class="todo-text">
+                    ${todo}
+                </label>
+                <button class="delete-btn">
+                    <span class="material-symbols-outlined">delete</span>
+                </button> 
+
+    `
+    const deleteBtn = todoLi.querySelector(".delete-btn");
+    deleteBtn.addEventListener("click",()=>{
+        deleteItem(todoIndex);
+
+    })
+    return todoLi;
+}
+
+function deleteItem(todoIndex){
+    AllTodos = AllTodos.filter((_,i) => i !== todoIndex);
+            saveTodos();
+        updateTodoList();
+}
+
+function saveTodos(){
+    const todosJson = JSON.stringify(AllTodos);//transforme du text en JSON contraiement a parse
+    localStorage.setItem("todos", todosJson);
+
+}
+
+function getTodos(){
+    const todos = localStorage.getItem("todos") || "[]";
+    return JSON.parse(todos)
+    //si l'utilisateur visite le site pour la 1ere fois 
+    //alors le tableau est vide donc localStorage revoi NULL 
+    // au lieu de renvoyer NULL il renvoi []
 }
 
 
-/* 
+
+/*   
 j'ai un text area ou un form j'utilise submit 
  si j'ai un bouton j'utilise click
 */
